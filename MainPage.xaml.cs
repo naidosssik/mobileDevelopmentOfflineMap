@@ -1,6 +1,5 @@
 ﻿using BruTile.Predefined;
 using BruTile.Web;
-
 using Mapsui;
 using Mapsui.Projections;
 using Mapsui.Tiling.Layers;
@@ -9,10 +8,11 @@ namespace OfflineMapApp;
 
 public partial class MainPage : ContentPage
 {
+    private const string YandexApiKey = "2cffb843-ca1a-430e-b39b-07f1d5b570a1";
+
     public MainPage()
     {
         InitializeComponent();
-
         InitializeMap();
     }
 
@@ -20,39 +20,37 @@ public partial class MainPage : ContentPage
     {
         MapView.Map = new Mapsui.Map();
 
-        // Источник тайлов
+        var tileUrl =
+            "https://tiles.api-maps.yandex.ru/v1/tiles/" +
+            "?x={x}" +
+            "&y={y}" +
+            "&z={z}" +
+            "&lang=en_RU" +
+            "&l=map" +
+            "&projection=web_mercator" +
+            $"&apikey={YandexApiKey}";
+
         var tileSource = new HttpTileSource(
             new GlobalSphericalMercator(),
-            "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
-            serverNodes: new[] { "a", "b", "c" },
-            name: "OpenStreetMap France",
-            configureHttpRequestMessage: request =>
-            {
-                request.Headers.TryAddWithoutValidation(
-                    "User-Agent",
-                    "OfflineMapApp/1.0 student-project"
-                );
-            }
+            tileUrl,
+            name: "Yandex Maps"
         );
 
-        // Слой карты
         var tileLayer = new TileLayer(tileSource);
 
         MapView.Map.Layers.Add(tileLayer);
 
-        // -----------------------------
-        // Стартовая позиция: Москва
-        // -----------------------------
-
+        // Москва
         double longitude = 37.6173;
         double latitude = 55.7558;
 
-		var projected = SphericalMercator.FromLonLat(longitude, latitude);
+        var projected =
+            SphericalMercator.FromLonLat(longitude, latitude);
 
-		var moscow = new MPoint(
-			projected.x,
-			projected.y
-		);
+        var moscow = new MPoint(
+            projected.x,
+            projected.y
+        );
 
         MapView.Map.Navigator.CenterOnAndZoomTo(
             moscow,
@@ -60,13 +58,13 @@ public partial class MainPage : ContentPage
         );
     }
 
-	private void ZoomIn_Clicked(object? sender, EventArgs e)
-	{
-		MapView.Map.Navigator.ZoomIn();
-	}
+    private void ZoomIn_Clicked(object? sender, EventArgs e)
+    {
+        MapView.Map.Navigator.ZoomIn();
+    }
 
-	private void ZoomOut_Clicked(object? sender, EventArgs e)
-	{
-		MapView.Map.Navigator.ZoomOut();
-	}
+    private void ZoomOut_Clicked(object? sender, EventArgs e)
+    {
+        MapView.Map.Navigator.ZoomOut();
+    }
 }
