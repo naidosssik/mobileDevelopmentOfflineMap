@@ -1,5 +1,8 @@
 ﻿using BruTile.Predefined;
 using BruTile.Web;
+
+using Mapsui;
+using Mapsui.Projections;
 using Mapsui.Tiling.Layers;
 
 namespace OfflineMapApp;
@@ -15,10 +18,9 @@ public partial class MainPage : ContentPage
 
     private void InitializeMap()
     {
-        // Создаём карту
         MapView.Map = new Mapsui.Map();
 
-        // Создаём источник тайлов
+        // Источник тайлов
         var tileSource = new HttpTileSource(
             new GlobalSphericalMercator(),
             "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
@@ -33,10 +35,28 @@ public partial class MainPage : ContentPage
             }
         );
 
-        // Создаём слой карты
+        // Слой карты
         var tileLayer = new TileLayer(tileSource);
 
-        // Добавляем слой на карту
         MapView.Map.Layers.Add(tileLayer);
+
+        // -----------------------------
+        // Стартовая позиция: Москва
+        // -----------------------------
+
+        double longitude = 37.6173;
+        double latitude = 55.7558;
+
+		var projected = SphericalMercator.FromLonLat(longitude, latitude);
+
+		var moscow = new MPoint(
+			projected.x,
+			projected.y
+		);
+
+        MapView.Map.Navigator.CenterOnAndZoomTo(
+            moscow,
+            MapView.Map.Navigator.Resolutions[10]
+        );
     }
 }
