@@ -19,7 +19,7 @@
             ColumnDefinitions="*,Auto">
 
             <Label
-                Text="Offline Map"
+                Text="Карта с точками и оффлайн-режим"
                 FontSize="24"
                 FontAttributes="Bold"
                 VerticalOptions="Center" />
@@ -37,10 +37,40 @@
             Margin="10"
             StrokeThickness="1">
 
-            <mapsui:MapControl
-                x:Name="MapView"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill" />
+            <Grid>
+
+                <!-- Карта -->
+                <mapsui:MapControl
+                    x:Name="MapView"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
+
+                <!-- Кнопки масштабирования -->
+                <VerticalStackLayout
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,20,20"
+                    Spacing="8">
+
+                    <Button
+                        Text="+"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        Clicked="ZoomIn_Clicked" />
+
+                    <Button
+                        Text="−"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        Clicked="ZoomOut_Clicked" />
+
+                </VerticalStackLayout>
+
+            </Grid>
 
         </Border>
 

@@ -59,4 +59,14 @@ public partial class MainPage : ContentPage
             MapView.Map.Navigator.Resolutions[10]
         );
     }
+
+	private void ZoomIn_Clicked(object? sender, EventArgs e)
+	{
+		MapView.Map.Navigator.ZoomIn();
+	}
+
+	private void ZoomOut_Clicked(object? sender, EventArgs e)
+	{
+		MapView.Map.Navigator.ZoomOut();
+	}
 }
