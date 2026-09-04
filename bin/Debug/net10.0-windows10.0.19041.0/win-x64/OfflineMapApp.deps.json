@@ -9,6 +9,7 @@
     ".NETCoreApp,Version=v10.0/win-x64": {
       "OfflineMapApp/1.0": {
         "dependencies": {
+          "BruTile": "6.0.0",
           "Mapsui.Maui": "5.1.0",
           "Microsoft.Extensions.Logging.Debug": "10.0.0",
           "Microsoft.Maui.Controls": "10.0.20",
