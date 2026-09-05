@@ -1,0 +1,18 @@
+namespace OfflineMapApp.Models;
+
+public class MapPoint
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    public string Name { get; set; } = string.Empty;
+
+    public string Description { get; set; } = string.Empty;
+
+    public double Latitude { get; set; }
+
+    public double Longitude { get; set; }
+
+    public string Source { get; set; } = "Manual";
+
+    public string? PhotoPath { get; set; }
+}
