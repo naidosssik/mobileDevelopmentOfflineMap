@@ -91,7 +91,8 @@
                 FontSize="14" />
 
             <Button
-                Text="+ Добавить точку" />
+                Text="+ Добавить точку"
+                Clicked="AddPoint_Clicked" />
 
             <Button
                 Text="Моё местоположение" />
