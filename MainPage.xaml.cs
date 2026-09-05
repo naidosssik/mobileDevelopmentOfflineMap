@@ -69,110 +69,17 @@ public partial class MainPage : ContentPage
     {
         MapView.Map.Navigator.ZoomOut();
     }
+
     private async void AddPoint_Clicked(object? sender, EventArgs e)
     {
-        string? name = await DisplayPromptAsync(
-            "Добавить точку",
-            "Введите название точки:",
-            placeholder: "Например: МГУ"
-        );
+        var addPointPage = new AddPointPage();
 
-        if (string.IsNullOrWhiteSpace(name))
-            return;
-
-        string? latitudeText = await DisplayPromptAsync(
-            "Координаты",
-            "Введите широту:",
-            placeholder: "55.7558",
-            keyboard: Keyboard.Numeric
-        );
-
-        if (string.IsNullOrWhiteSpace(latitudeText))
-            return;
-
-        string? longitudeText = await DisplayPromptAsync(
-            "Координаты",
-            "Введите долготу:",
-            placeholder: "37.6173",
-            keyboard: Keyboard.Numeric
-        );
-
-        if (string.IsNullOrWhiteSpace(longitudeText))
-            return;
-
-        string? description = await DisplayPromptAsync(
-            "Описание",
-            "Введите описание точки:",
-            placeholder: "Можно оставить пустым"
-        );
-
-        if (!double.TryParse(
-            latitudeText.Replace(',', '.'),
-            System.Globalization.NumberStyles.Float,
-            System.Globalization.CultureInfo.InvariantCulture,
-            out double latitude))
+        addPointPage.BindingContext = new Action<MapPoint>(point =>
         {
-            await DisplayAlertAsync(
-                "Ошибка",
-                "Широта введена неверно.",
-                "OK"
-            );
+            _points.Add(point);
+        });
 
-            return;
-        }
-
-        if (!double.TryParse(
-            longitudeText.Replace(',', '.'),
-            System.Globalization.NumberStyles.Float,
-            System.Globalization.CultureInfo.InvariantCulture,
-            out double longitude))
-        {
-            await DisplayAlertAsync(
-                "Ошибка",
-                "Долгота введена неверно.",
-                "OK"
-            );
-
-            return;
-        }
-
-        if (latitude < -90 || latitude > 90)
-        {
-            await DisplayAlertAsync(
-                "Ошибка",
-                "Широта должна быть от -90 до 90.",
-                "OK"
-            );
-
-            return;
-        }
-
-        if (longitude < -180 || longitude > 180)
-        {
-            await DisplayAlertAsync(
-                "Ошибка",
-                "Долгота должна быть от -180 до 180.",
-                "OK"
-            );
-
-            return;
-        }
-
-        var point = new MapPoint
-        {
-            Name = name,
-            Description = description ?? string.Empty,
-            Latitude = latitude,
-            Longitude = longitude,
-            Source = "Manual"
-        };
-
-        _points.Add(point);
-
-        await DisplayAlertAsync(
-            "Готово",
-            $"Точка «{point.Name}» добавлена.",
-            "OK"
-        );
+        await Navigation.PushModalAsync(addPointPage);
     }
+   
 }

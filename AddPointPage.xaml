@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="OfflineMapApp.AddPointPage"
+    Title="Добавление точки">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="16">
+
+            <Label
+                Text="Добавление точки"
+                FontSize="26"
+                FontAttributes="Bold" />
+
+            <Label
+                Text="Заполните данные новой точки"
+                FontSize="14"
+                TextColor="Gray" />
+
+            <!-- Название -->
+
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Название " />
+                        <Span
+                            Text="*"
+                            TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Entry
+                x:Name="NameEntry"
+                Placeholder="Например: МГУ"
+                MaxLength="100" />
+
+
+            <!-- Широта -->
+
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Широта " />
+                        <Span
+                            Text="*"
+                            TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Entry
+                x:Name="LatitudeEntry"
+                Placeholder="55.7033"
+                Keyboard="Numeric" />
+
+
+            <!-- Долгота -->
+
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Долгота " />
+                        <Span
+                            Text="*"
+                            TextColor="Red" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Entry
+                x:Name="LongitudeEntry"
+                Placeholder="37.5300"
+                Keyboard="Numeric" />
+
+
+            <!-- Описание -->
+
+            <Label
+                Text="Описание" />
+
+            <Editor
+                x:Name="DescriptionEditor"
+                Placeholder="Дополнительная информация о точке"
+                HeightRequest="100"
+                AutoSize="TextChanges" />
+
+
+            <!-- Подсказка -->
+
+            <Label
+                Text="* — обязательные поля"
+                TextColor="Gray"
+                FontSize="12" />
+
+
+            <!-- Ошибка -->
+
+            <Label
+                x:Name="ErrorLabel"
+                TextColor="Red"
+                FontSize="13"
+                IsVisible="False" />
+
+
+            <!-- Кнопки -->
+
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="12"
+                Margin="0,10,0,0">
+
+                <Button
+                    Text="Отмена"
+                    Clicked="Cancel_Clicked" />
+
+                <Button
+                    Grid.Column="1"
+                    Text="Добавить"
+                    Clicked="Save_Clicked" />
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
