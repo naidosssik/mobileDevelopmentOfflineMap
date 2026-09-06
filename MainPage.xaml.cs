@@ -3,12 +3,16 @@
 using BruTile.Predefined;
 using BruTile.Web;
 
+using Mapsui.Nts;
+using NetTopologySuite.Geometries;
+using MauiLocation = Microsoft.Maui.Devices.Sensors.Location;
+
 using Mapsui;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
-using Microsoft.Maui.Devices.Sensors;   
+using Microsoft.Maui.Devices.Sensors;
 
 using OfflineMapApp.Models;
 using OfflineMapApp.Services;
@@ -25,7 +29,7 @@ public partial class MainPage : ContentPage
     private readonly List<MapPoint> _points = new();
 
     private PointFeature? _currentLocationFeature;
-    private Location? _currentLocation;
+    private MauiLocation? _currentLocation;
 
     // Отдельный слой Mapsui, на котором будут находиться наши точки
     private readonly MemoryLayer _pointsLayer = new()
@@ -642,7 +646,7 @@ public partial class MainPage : ContentPage
                     TimeSpan.FromSeconds(10)
                 );
 
-            Location? location =
+            MauiLocation? location =
                 await Geolocation.Default
                     .GetLocationAsync(request);
 
@@ -699,7 +703,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void ShowCurrentLocation(Location location)
+    private void ShowCurrentLocation(MauiLocation location)
     {
         _currentLocation = location;
 
@@ -933,4 +937,231 @@ public partial class MainPage : ContentPage
 
         await ProcessPhotoAsync(photoPath);
     }
+
+    private async void BuildRoute_Clicked(object? sender, EventArgs e)
+    {
+        if (sender is not Button button)
+        {
+            return;
+        }
+
+        if (button.CommandParameter
+            is not MapPoint destinationPoint)
+        {
+            return;
+        }
+
+        await BuildRouteToPointAsync(
+            destinationPoint
+        );
+    }
+
+    private async Task BuildRouteToPointAsync(MapPoint destinationPoint)
+    {
+        try
+        {
+            // Если GPS ещё не определён
+            if (_currentLocation == null)
+            {
+                bool determineLocation =
+                    await DisplayAlertAsync(
+                        "Местоположение",
+                        "Сначала необходимо определить ваше текущее местоположение.",
+                        "Определить",
+                        "Отмена"
+                    );
+
+                if (!determineLocation)
+                {
+                    return;
+                }
+
+                var request =
+                    new GeolocationRequest(
+                        GeolocationAccuracy.Medium,
+                        TimeSpan.FromSeconds(10)
+                    );
+
+                _currentLocation =
+                    await Geolocation.Default
+                        .GetLocationAsync(request);
+
+                if (_currentLocation == null)
+                {
+                    await DisplayAlertAsync(
+                        "Маршрут",
+                        "Не удалось определить текущее местоположение.",
+                        "OK"
+                    );
+
+                    return;
+                }
+
+                ShowCurrentLocation(_currentLocation);
+            }
+
+            var route =
+                await RouteService.GetRouteAsync(
+                    _currentLocation.Latitude,
+                    _currentLocation.Longitude,
+                    destinationPoint.Latitude,
+                    destinationPoint.Longitude
+                );
+
+
+            if (route == null)
+            {
+                await DisplayAlertAsync(
+                    "Маршрут",
+                    "Не удалось построить маршрут.",
+                    "OK"
+                );
+
+                return;
+            }
+
+            DrawRoute(route);
+
+            double distanceKm = route.Distance / 1000.0;
+            double durationMinutes = route.Duration / 60.0;
+
+            await DisplayAlertAsync(
+                "Маршрут построен",
+                $"До точки «{destinationPoint.Name}»\n\n" +
+                $"Расстояние: {distanceKm:F1} км\n" +
+                $"Время: {durationMinutes:F0} мин.",
+                "OK"
+            );
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Ошибка маршрута",
+                ex.Message,
+                "OK"
+            );
+        }
+    }
+
+    private void DrawRoute(OsrmRoute route)
+    {
+        if (route.Geometry.Coordinates.Count < 2)
+        {
+            return;
+        }
+
+
+        var coordinates =
+            new List<Coordinate>();
+
+
+        foreach (var pair
+            in route.Geometry.Coordinates)
+        {
+            if (pair.Count < 2)
+            {
+                continue;
+            }
+
+            double longitude = pair[0];
+            double latitude = pair[1];
+
+
+            var projected =
+                SphericalMercator.FromLonLat(
+                    longitude,
+                    latitude
+                );
+
+
+            coordinates.Add(
+                new Coordinate(
+                    projected.x,
+                    projected.y
+                )
+            );
+        }
+
+
+        if (coordinates.Count < 2)
+        {
+            return;
+        }
+
+
+        var lineString =
+            new LineString(
+                coordinates.ToArray()
+            );
+
+
+        var routeFeature =
+            new GeometryFeature
+            {
+                Geometry = lineString
+            };
+
+
+        routeFeature.Styles.Add(
+            new VectorStyle
+            {
+                Line =
+                    new Mapsui.Styles.Pen(
+                        Mapsui.Styles.Color.Blue,
+                        6
+                    ),
+
+                Outline =
+                    new Mapsui.Styles.Pen(
+                        Mapsui.Styles.Color.White,
+                        9
+                    )
+            }
+        );
+
+
+        // Старый маршрут убираем
+        _routeLayer.Features =
+            new List<IFeature>
+            {
+                routeFeature
+            };
+
+
+        _routeLayer.DataHasChanged();
+
+
+        ZoomToRoute(coordinates);
+    }
+
+    private void ZoomToRoute(List<Coordinate> coordinates)
+    {
+        double minX =
+            coordinates.Min(c => c.X);
+
+        double maxX =
+            coordinates.Max(c => c.X);
+
+        double minY =
+            coordinates.Min(c => c.Y);
+
+        double maxY =
+            coordinates.Max(c => c.Y);
+
+
+        var box =
+            new MRect(
+                minX,
+                minY,
+                maxX,
+                maxY
+            );
+
+
+        MapView.Map.Navigator.ZoomToBox(
+            box,
+            MBoxFit.Fit,
+            40
+        );
+}
 }

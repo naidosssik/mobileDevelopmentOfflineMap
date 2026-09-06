@@ -68,6 +68,7 @@
 	<ItemGroup>
 		<PackageReference Include="BruTile" Version="6.0.0" />
 		<PackageReference Include="Mapsui.Maui" Version="5.1.0" />
+		<PackageReference Include="Mapsui.Nts" Version="5.1.0" />
 		<PackageReference Include="MetadataExtractor" Version="2.8.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />

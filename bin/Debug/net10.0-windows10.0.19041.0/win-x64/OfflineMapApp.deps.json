@@ -11,6 +11,7 @@
         "dependencies": {
           "BruTile": "6.0.0",
           "Mapsui.Maui": "5.1.0",
+          "Mapsui.Nts": "5.1.0",
           "MetadataExtractor": "2.8.1",
           "Microsoft.Extensions.Logging.Debug": "10.0.0",
           "Microsoft.Maui.Controls": "10.0.20",

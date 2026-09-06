@@ -40365,6 +40365,7 @@
     "net10.0-android": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "Mapsui.Nts >= 5.1.0",
       "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
@@ -40373,6 +40374,7 @@
     "net10.0-ios": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "Mapsui.Nts >= 5.1.0",
       "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
@@ -40381,6 +40383,7 @@
     "net10.0-maccatalyst": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "Mapsui.Nts >= 5.1.0",
       "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
@@ -40389,6 +40392,7 @@
     "net10.0-windows10.0.19041.0": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "Mapsui.Nts >= 5.1.0",
       "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20"
@@ -40471,6 +40475,10 @@
             "version": "[6.0.0, )"
           },
           "Mapsui.Maui": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
+          "Mapsui.Nts": {
             "target": "Package",
             "version": "[5.1.0, )"
           },
@@ -40803,6 +40811,10 @@
             "target": "Package",
             "version": "[5.1.0, )"
           },
+          "Mapsui.Nts": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
           "MetadataExtractor": {
             "target": "Package",
             "version": "[2.8.1, )"
@@ -41129,6 +41141,10 @@
             "version": "[6.0.0, )"
           },
           "Mapsui.Maui": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
+          "Mapsui.Nts": {
             "target": "Package",
             "version": "[5.1.0, )"
           },
@@ -41459,6 +41475,10 @@
             "version": "[6.0.0, )"
           },
           "Mapsui.Maui": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
+          "Mapsui.Nts": {
             "target": "Package",
             "version": "[5.1.0, )"
           },
