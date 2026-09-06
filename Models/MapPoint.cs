@@ -12,6 +12,8 @@ public class MapPoint
 
     public double Longitude { get; set; }
 
+    public string CoordinatesText => $"{Latitude:F5}, {Longitude:F5}";
+
     public string Source { get; set; } = "Manual";
 
     public string? PhotoPath { get; set; }

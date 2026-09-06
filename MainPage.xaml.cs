@@ -37,6 +37,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         InitializeMap();
+        RefreshPointsList();
     }
 
     private void InitializeMap()
@@ -194,6 +195,20 @@ public partial class MainPage : ContentPage
             MapView.Map.Navigator.Resolutions[12],
             500
         );
+
+        RefreshPointsList();
+    }
+
+    private void RefreshPointsList()
+    {
+        PointsCollectionView.ItemsSource = null;
+        PointsCollectionView.ItemsSource = _points;
+
+        EmptyPointsLabel.IsVisible =
+            _points.Count == 0;
+
+        PointsCollectionView.IsVisible =
+            _points.Count > 0;
     }
 
     private IStyle CreateMarkerStyle(
@@ -488,5 +503,33 @@ public partial class MainPage : ContentPage
                     0.5
                 )
         };
+    }
+
+    private void PointsCollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault()
+            is not MapPoint point)
+        {
+            return;
+        }
+
+        var projected =
+            SphericalMercator.FromLonLat(
+                point.Longitude,
+                point.Latitude
+            );
+
+        var mapPosition = new MPoint(
+            projected.x,
+            projected.y
+        );
+
+        MapView.Map.Navigator.CenterOnAndZoomTo(
+            mapPosition,
+            MapView.Map.Navigator.Resolutions[12],
+            500
+        );
+
+        PointsCollectionView.SelectedItem = null;
     }
 }
