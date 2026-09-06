@@ -25,11 +25,18 @@ public partial class MainPage : ContentPage
     private readonly List<MapPoint> _points = new();
 
     private PointFeature? _currentLocationFeature;
+    private Location? _currentLocation;
 
     // Отдельный слой Mapsui, на котором будут находиться наши точки
     private readonly MemoryLayer _pointsLayer = new()
     {
         Name = "User Points",
+        Style = null
+    };
+
+    private readonly MemoryLayer _routeLayer = new()
+    {
+        Name = "Route",
         Style = null
     };
 
@@ -45,9 +52,6 @@ public partial class MainPage : ContentPage
     private void InitializeMap()
     {
         MapView.Map = new Mapsui.Map();
-
-
-
         string tileUrl =
             "https://tiles.api-maps.yandex.ru/v1/tiles/" +
             "?x={x}" +
@@ -65,34 +69,24 @@ public partial class MainPage : ContentPage
             name: "Yandex Maps"
         );
 
-
         var tileLayer = new TileLayer(tileSource);
 
-
-        // Сначала добавляем слой карты
         MapView.Map.Layers.Add(tileLayer);
-
-
-        // Потом слой пользовательских точек, чтобы точки рисовались поверх карты
+        MapView.Map.Layers.Add(_routeLayer);
         MapView.Map.Layers.Add(_pointsLayer);
-
 
         double longitude = 37.6173;
         double latitude = 55.7558;
-
-
         var projected =
             SphericalMercator.FromLonLat(
                 longitude,
                 latitude
             );
 
-
         var moscow = new MPoint(
             projected.x,
             projected.y
         );
-
 
         MapView.Map.Navigator.CenterOnAndZoomTo(
             moscow,
@@ -707,29 +701,15 @@ public partial class MainPage : ContentPage
 
     private void ShowCurrentLocation(Location location)
     {
-        double latitude =
-            location.Latitude;
+        _currentLocation = location;
 
-        double longitude =
-            location.Longitude;
+        double latitude = location.Latitude;
+        double longitude = location.Longitude;
 
+        var projected = SphericalMercator.FromLonLat(longitude,latitude);
+        var mapPosition = new MPoint(projected.x, projected.y);
 
-        var projected =
-            SphericalMercator.FromLonLat(
-                longitude,
-                latitude
-            );
-
-
-        var mapPosition =
-            new MPoint(
-                projected.x,
-                projected.y
-            );
-
-
-        // Если предыдущая GPS-точка уже была,
-        // удаляем её
+        // Если предыдущая GPS-точка уже была, удаляем её
         if (_currentLocationFeature != null)
         {
             _pointsLayer.Features =
@@ -740,11 +720,9 @@ public partial class MainPage : ContentPage
                     .ToList();
         }
 
-
         // Создаём новую GPS-точку
         _currentLocationFeature =
             new PointFeature(mapPosition);
-
 
         // Отдельный стиль для GPS
         _currentLocationFeature.Styles.Add(

@@ -169,6 +169,13 @@
                                         Clicked="GoToPoint_Clicked" />
 
                                     <Button
+                                        Text="Маршрут"
+                                        FontSize="12"
+                                        Padding="10,5"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="BuildRoute_Clicked" />
+
+                                    <Button
                                         Text="Удалить"
                                         FontSize="12"
                                         Padding="10,5"
