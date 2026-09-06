@@ -6,16 +6,17 @@ namespace OfflineMapApp;
 public partial class AddPointPage : ContentPage
 {
     private string _selectedColor = "Red";
-    private string _selectedType = "Icon";
+    private string _selectedShape = "Circle";
+    private string _selectedContent = "Empty";
 
     public AddPointPage()
     {
         InitializeComponent();
 
         UpdateColorSelection();
-        UpdateTypeSelection();
+        UpdateShapeSelection();
+        UpdateContentSelection();
     }
-
 
     private async void Save_Clicked(object? sender, EventArgs e)
     {
@@ -33,8 +34,6 @@ public partial class AddPointPage : ContentPage
         string description =
             DescriptionEditor.Text?.Trim() ?? string.Empty;
 
-
-        // Обязательные поля
 
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -55,20 +54,23 @@ public partial class AddPointPage : ContentPage
         }
 
 
-        // Проверка координат
-
-        if (!TryParseCoordinate(latitudeText, out double latitude))
+        if (!TryParseCoordinate(
+            latitudeText,
+            out double latitude))
         {
             ShowError("Широта должна быть числом.");
             return;
         }
 
-        if (!TryParseCoordinate(longitudeText, out double longitude))
+        if (!TryParseCoordinate(
+            longitudeText,
+            out double longitude))
         {
             ShowError("Долгота должна быть числом.");
             return;
         }
 
+        // Проверка диапазонов
 
         if (latitude < -90 || latitude > 90)
         {
@@ -89,17 +91,9 @@ public partial class AddPointPage : ContentPage
         }
 
 
-        // Иконка
-
-        string markerIcon =
-            IconPicker.SelectedItem?.ToString() ?? "Heart";
-
-
-        // Номер
-
         int? markerNumber = null;
 
-        if (_selectedType == "Number")
+        if (_selectedContent == "Number")
         {
             if (string.IsNullOrWhiteSpace(NumberEntry.Text))
             {
@@ -111,7 +105,19 @@ public partial class AddPointPage : ContentPage
                 NumberEntry.Text,
                 out int number))
             {
-                ShowError("Номер точки должен быть целым числом.");
+                ShowError(
+                    "Номер точки должен быть целым числом."
+                );
+
+                return;
+            }
+
+            if (number < 1)
+            {
+                ShowError(
+                    "Номер точки должен быть больше 0."
+                );
+
                 return;
             }
 
@@ -119,7 +125,9 @@ public partial class AddPointPage : ContentPage
         }
 
 
-        // Создание точки
+        string markerIcon =
+            IconPicker.SelectedItem?.ToString() ?? "Heart";
+
 
         var point = new MapPoint
         {
@@ -133,13 +141,16 @@ public partial class AddPointPage : ContentPage
             Source = "Manual",
 
             MarkerColor = _selectedColor,
-            MarkerType = _selectedType,
+
+            MarkerShape = _selectedShape,
+
+            MarkerContent = _selectedContent,
+
             MarkerIcon = markerIcon,
+
             MarkerNumber = markerNumber
         };
 
-
-        // Передаём точку обратно на MainPage
 
         if (BindingContext is Action<MapPoint> addPointAction)
         {
@@ -147,9 +158,9 @@ public partial class AddPointPage : ContentPage
         }
 
 
+        // Закрываем форму
         await Navigation.PopModalAsync();
     }
-
 
     private async void Cancel_Clicked(
         object? sender,
@@ -157,11 +168,6 @@ public partial class AddPointPage : ContentPage
     {
         await Navigation.PopModalAsync();
     }
-
-
-    // -----------------------------
-    // Цвет точки
-    // -----------------------------
 
     private void RedColor_Clicked(
         object? sender,
@@ -224,93 +230,112 @@ public partial class AddPointPage : ContentPage
         PurpleColorButton.BorderColor = Colors.Black;
     }
 
-
-    // -----------------------------
-    // Тип точки
-    // -----------------------------
-
-    private void PinType_Clicked(
+    private void PinShape_Clicked(
         object? sender,
         EventArgs e)
     {
-        SelectMarkerType("Pin");
+        _selectedShape = "Pin";
+
+        UpdateShapeSelection();
     }
 
 
-    private void CircleType_Clicked(
+    private void CircleShape_Clicked(
         object? sender,
         EventArgs e)
     {
-        SelectMarkerType("Circle");
+        _selectedShape = "Circle";
+
+        UpdateShapeSelection();
     }
 
 
-    private void NumberType_Clicked(
+    private void UpdateShapeSelection()
+    {
+        PinShapeButton.BorderWidth =
+            _selectedShape == "Pin" ? 2 : 0;
+
+        CircleShapeButton.BorderWidth =
+            _selectedShape == "Circle" ? 2 : 0;
+
+
+        PinShapeButton.BorderColor = Colors.Black;
+        CircleShapeButton.BorderColor = Colors.Black;
+    }
+
+    private void EmptyContent_Clicked(
         object? sender,
         EventArgs e)
     {
-        SelectMarkerType("Number");
+        SelectContent("Empty");
     }
 
 
-    private void IconType_Clicked(
+    private void NumberContent_Clicked(
         object? sender,
         EventArgs e)
     {
-        SelectMarkerType("Icon");
+        SelectContent("Number");
     }
 
 
-    private void SelectMarkerType(string type)
+    private void IconContent_Clicked(
+        object? sender,
+        EventArgs e)
     {
-        _selectedType = type;
+        SelectContent("Icon");
+    }
 
+
+    private void SelectContent(string content)
+    {
+        _selectedContent = content;
+
+
+        // Если выбран номер — показываем поле ввода номера
+        NumberSettings.IsVisible =
+            content == "Number";
+
+
+        // Если выбрана иконка — показываем Picker
         IconSettings.IsVisible =
-            type == "Icon";
+            content == "Icon";
+
+
+        UpdateContentSelection();
+    }
+
+
+    private void UpdateContentSelection()
+    {
+        EmptyContentButton.BorderWidth =
+            _selectedContent == "Empty" ? 2 : 0;
+
+        NumberContentButton.BorderWidth =
+            _selectedContent == "Number" ? 2 : 0;
+
+        IconContentButton.BorderWidth =
+            _selectedContent == "Icon" ? 2 : 0;
+
+
+        EmptyContentButton.BorderColor = Colors.Black;
+        NumberContentButton.BorderColor = Colors.Black;
+        IconContentButton.BorderColor = Colors.Black;
+
 
         NumberSettings.IsVisible =
-            type == "Number";
+            _selectedContent == "Number";
 
-        UpdateTypeSelection();
+        IconSettings.IsVisible =
+            _selectedContent == "Icon";
     }
 
-
-    private void UpdateTypeSelection()
-    {
-        PinTypeButton.BorderWidth =
-            _selectedType == "Pin" ? 2 : 0;
-
-        CircleTypeButton.BorderWidth =
-            _selectedType == "Circle" ? 2 : 0;
-
-        NumberTypeButton.BorderWidth =
-            _selectedType == "Number" ? 2 : 0;
-
-        IconTypeButton.BorderWidth =
-            _selectedType == "Icon" ? 2 : 0;
-
-
-        PinTypeButton.BorderColor = Colors.Black;
-        CircleTypeButton.BorderColor = Colors.Black;
-        NumberTypeButton.BorderColor = Colors.Black;
-        IconTypeButton.BorderColor = Colors.Black;
-    }
-
-
-    // -----------------------------
-    // Ошибки
-    // -----------------------------
 
     private void ShowError(string message)
     {
         ErrorLabel.Text = message;
         ErrorLabel.IsVisible = true;
     }
-
-
-    // -----------------------------
-    // Координаты
-    // -----------------------------
 
     private bool TryParseCoordinate(
         string text,

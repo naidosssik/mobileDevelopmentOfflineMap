@@ -142,36 +142,52 @@
             <!-- Тип -->
 
             <Label
-                Text="Тип метки"
+                Text="Форма метки"
                 FontAttributes="Bold"
                 Margin="0,8,0,0" />
 
             <HorizontalStackLayout Spacing="8">
 
                 <Button
-                    x:Name="PinTypeButton"
-                    Text="Метка"
+                    x:Name="PinShapeButton"
+                    Text="📍 Метка"
                     BorderWidth="0"
-                    Clicked="PinType_Clicked" />
+                    Clicked="PinShape_Clicked" />
 
                 <Button
-                    x:Name="CircleTypeButton"
-                    Text="Круг"
-                    BorderWidth="0"
-                    Clicked="CircleType_Clicked" />
-
-                <Button
-                    x:Name="NumberTypeButton"
-                    Text="№"
-                    BorderWidth="0"
-                    Clicked="NumberType_Clicked" />
-
-                <Button
-                    x:Name="IconTypeButton"
-                    Text="Иконка"
+                    x:Name="CircleShapeButton"
+                    Text="● Круг"
                     BorderWidth="2"
                     BorderColor="Black"
-                    Clicked="IconType_Clicked" />
+                    Clicked="CircleShape_Clicked" />
+
+            </HorizontalStackLayout>
+
+            <Label
+                Text="Содержимое"
+                FontAttributes="Bold"
+                Margin="0,8,0,0" />
+
+            <HorizontalStackLayout Spacing="8">
+
+                <Button
+                    x:Name="EmptyContentButton"
+                    Text="—"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    Clicked="EmptyContent_Clicked" />
+
+                <Button
+                    x:Name="NumberContentButton"
+                    Text="№"
+                    BorderWidth="0"
+                    Clicked="NumberContent_Clicked" />
+
+                <Button
+                    x:Name="IconContentButton"
+                    Text="Иконка"
+                    BorderWidth="0"
+                    Clicked="IconContent_Clicked" />
 
             </HorizontalStackLayout>
 
@@ -179,7 +195,6 @@
 
             <VerticalStackLayout
                 x:Name="IconSettings"
-                Spacing="5"
                 IsVisible="True">
 
                 <Label Text="Иконка" />
@@ -204,7 +219,6 @@
 
             <VerticalStackLayout
                 x:Name="NumberSettings"
-                Spacing="5"
                 IsVisible="False">
 
                 <Label Text="Номер точки" />

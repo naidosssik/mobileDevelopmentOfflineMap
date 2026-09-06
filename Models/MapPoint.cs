@@ -16,14 +16,18 @@ public class MapPoint
 
     public string? PhotoPath { get; set; }
 
-
-    // Оформление точки
-
+    // Цвет метки
     public string MarkerColor { get; set; } = "Red";
 
-    public string MarkerType { get; set; } = "Icon";
+    // Форма: Circle или Pin
+    public string MarkerShape { get; set; } = "Circle";
 
+    // Содержимое: Empty, Number или Icon
+    public string MarkerContent { get; set; } = "Empty";
+
+    // Используется только при MarkerContent = Icon
     public string MarkerIcon { get; set; } = "Heart";
 
+    // Используется только при MarkerContent = Number
     public int? MarkerNumber { get; set; }
 }
