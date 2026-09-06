@@ -15,4 +15,15 @@ public class MapPoint
     public string Source { get; set; } = "Manual";
 
     public string? PhotoPath { get; set; }
+
+
+    // Оформление точки
+
+    public string MarkerColor { get; set; } = "Red";
+
+    public string MarkerType { get; set; } = "Icon";
+
+    public string MarkerIcon { get; set; } = "Heart";
+
+    public int? MarkerNumber { get; set; }
 }

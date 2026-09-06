@@ -10,7 +10,8 @@
 
         <VerticalStackLayout
             Padding="30"
-            Spacing="16">
+            Spacing="14"
+            MaximumWidthRequest="600">
 
             <Label
                 Text="Добавление точки"
@@ -18,7 +19,7 @@
                 FontAttributes="Bold" />
 
             <Label
-                Text="Заполните данные новой точки"
+                Text="Укажите координаты и внешний вид метки"
                 FontSize="14"
                 TextColor="Gray" />
 
@@ -28,9 +29,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Название " />
-                        <Span
-                            Text="*"
-                            TextColor="Red" />
+                        <Span Text="*" TextColor="Red" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -40,80 +39,200 @@
                 Placeholder="Например: МГУ"
                 MaxLength="100" />
 
+            <!-- Координаты -->
 
-            <!-- Широта -->
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="12">
 
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Широта " />
-                        <Span
-                            Text="*"
-                            TextColor="Red" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                <VerticalStackLayout Spacing="5">
 
-            <Entry
-                x:Name="LatitudeEntry"
-                Placeholder="55.7033"
-                Keyboard="Numeric" />
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Широта " />
+                                <Span Text="*" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
+                    <Entry
+                        x:Name="LatitudeEntry"
+                        Placeholder="55.7033"
+                        Keyboard="Numeric" />
 
-            <!-- Долгота -->
+                </VerticalStackLayout>
 
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Долгота " />
-                        <Span
-                            Text="*"
-                            TextColor="Red" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="5">
 
-            <Entry
-                x:Name="LongitudeEntry"
-                Placeholder="37.5300"
-                Keyboard="Numeric" />
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Долгота " />
+                                <Span Text="*" TextColor="Red" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
+                    <Entry
+                        x:Name="LongitudeEntry"
+                        Placeholder="37.5300"
+                        Keyboard="Numeric" />
+
+                </VerticalStackLayout>
+
+            </Grid>
 
             <!-- Описание -->
 
-            <Label
-                Text="Описание" />
+            <Label Text="Текст при нажатии на точку" />
 
             <Editor
                 x:Name="DescriptionEditor"
-                Placeholder="Дополнительная информация о точке"
+                Placeholder="Этот текст будет показан при выборе точки"
                 HeightRequest="100"
                 AutoSize="TextChanges" />
 
+            <!-- Цвет -->
 
-            <!-- Подсказка -->
+            <Label
+                Text="Цвет"
+                FontAttributes="Bold"
+                Margin="0,8,0,0" />
+
+            <HorizontalStackLayout Spacing="10">
+
+                <Button
+                    x:Name="RedColorButton"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    BackgroundColor="#E65353"
+                    BorderColor="Black"
+                    BorderWidth="3"
+                    Clicked="RedColor_Clicked" />
+
+                <Button
+                    x:Name="BlueColorButton"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    BackgroundColor="#4285F4"
+                    BorderWidth="0"
+                    Clicked="BlueColor_Clicked" />
+
+                <Button
+                    x:Name="GreenColorButton"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    BackgroundColor="#43A047"
+                    BorderWidth="0"
+                    Clicked="GreenColor_Clicked" />
+
+                <Button
+                    x:Name="PurpleColorButton"
+                    WidthRequest="48"
+                    HeightRequest="48"
+                    BackgroundColor="#9C27B0"
+                    BorderWidth="0"
+                    Clicked="PurpleColor_Clicked" />
+
+            </HorizontalStackLayout>
+
+            <!-- Тип -->
+
+            <Label
+                Text="Тип метки"
+                FontAttributes="Bold"
+                Margin="0,8,0,0" />
+
+            <HorizontalStackLayout Spacing="8">
+
+                <Button
+                    x:Name="PinTypeButton"
+                    Text="Метка"
+                    BorderWidth="0"
+                    Clicked="PinType_Clicked" />
+
+                <Button
+                    x:Name="CircleTypeButton"
+                    Text="Круг"
+                    BorderWidth="0"
+                    Clicked="CircleType_Clicked" />
+
+                <Button
+                    x:Name="NumberTypeButton"
+                    Text="№"
+                    BorderWidth="0"
+                    Clicked="NumberType_Clicked" />
+
+                <Button
+                    x:Name="IconTypeButton"
+                    Text="Иконка"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    Clicked="IconType_Clicked" />
+
+            </HorizontalStackLayout>
+
+            <!-- Настройка иконки -->
+
+            <VerticalStackLayout
+                x:Name="IconSettings"
+                Spacing="5"
+                IsVisible="True">
+
+                <Label Text="Иконка" />
+
+                <Picker
+                    x:Name="IconPicker"
+                    Title="Выберите иконку"
+                    SelectedIndex="0">
+
+                    <Picker.Items>
+                        <x:String>Heart</x:String>
+                        <x:String>Star</x:String>
+                        <x:String>Place</x:String>
+                        <x:String>Photo</x:String>
+                    </Picker.Items>
+
+                </Picker>
+
+            </VerticalStackLayout>
+
+            <!-- Настройка номера -->
+
+            <VerticalStackLayout
+                x:Name="NumberSettings"
+                Spacing="5"
+                IsVisible="False">
+
+                <Label Text="Номер точки" />
+
+                <Entry
+                    x:Name="NumberEntry"
+                    Placeholder="Например: 1"
+                    Keyboard="Numeric" />
+
+            </VerticalStackLayout>
 
             <Label
                 Text="* — обязательные поля"
-                TextColor="Gray"
-                FontSize="12" />
-
-
-            <!-- Ошибка -->
+                FontSize="12"
+                TextColor="Gray" />
 
             <Label
                 x:Name="ErrorLabel"
-                TextColor="Red"
                 FontSize="13"
+                TextColor="Red"
                 IsVisible="False" />
-
 
             <!-- Кнопки -->
 
             <Grid
                 ColumnDefinitions="*,*"
                 ColumnSpacing="12"
-                Margin="0,10,0,0">
+                Margin="0,12,0,0">
 
                 <Button
                     Text="Отмена"
