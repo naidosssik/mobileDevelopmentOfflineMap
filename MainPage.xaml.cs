@@ -513,6 +513,24 @@ public partial class MainPage : ContentPage
             return;
         }
 
+        MoveToPoint(point);
+
+        PointsCollectionView.SelectedItem = null;
+    }
+
+    private void GoToPoint_Clicked(object? sender, EventArgs e)
+    {
+        if (sender is not Button button)
+            return;
+
+        if (button.CommandParameter is not MapPoint point)
+            return;
+
+        MoveToPoint(point);
+    }
+
+    private void MoveToPoint(MapPoint point)
+    {
         var projected =
             SphericalMercator.FromLonLat(
                 point.Longitude,
@@ -529,7 +547,50 @@ public partial class MainPage : ContentPage
             MapView.Map.Navigator.Resolutions[12],
             500
         );
+    }
 
-        PointsCollectionView.SelectedItem = null;
+    private async void DeletePoint_Clicked(object? sender, EventArgs e)
+    {
+        if (sender is not Button button)
+            return;
+
+        if (button.CommandParameter is not MapPoint point)
+            return;
+
+        bool confirmed = await DisplayAlertAsync(
+            "Удаление точки",
+            $"Удалить точку «{point.Name}»?",
+            "Удалить",
+            "Отмена"
+        );
+
+        if (!confirmed)
+            return;
+
+        RemovePoint(point);
+    }
+
+    private void RemovePoint(MapPoint point)
+    {
+        _points.Remove(point);
+
+        var featureToRemove =
+            _pointsLayer.Features
+                .FirstOrDefault(feature =>
+                    feature["Id"]?.ToString()
+                    == point.Id.ToString()
+                );
+
+        if (featureToRemove != null)
+        {
+            _pointsLayer.Features =
+                _pointsLayer.Features
+                    .Where(feature => feature != featureToRemove)
+                    .ToList();
+
+            _pointsLayer.DataHasChanged();
+        }
+
+        RefreshPointsList();
     }
 }

@@ -109,14 +109,18 @@
                             Margin="0,0,0,8">
 
                             <Grid
+                                RowDefinitions="Auto,Auto"
                                 ColumnDefinitions="Auto,*"
-                                ColumnSpacing="10">
+                                ColumnSpacing="10"
+                                RowSpacing="8">
 
+                                <!-- Маркер -->
                                 <Label
                                     Text="●"
                                     FontSize="18"
                                     VerticalOptions="Center" />
 
+                                <!-- Название и координаты -->
                                 <VerticalStackLayout
                                     Grid.Column="1"
                                     Spacing="2">
@@ -132,6 +136,28 @@
                                         TextColor="Gray" />
 
                                 </VerticalStackLayout>
+
+                                <!-- Кнопки -->
+                                <HorizontalStackLayout
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    Spacing="8">
+
+                                    <Button
+                                        Text="Перейти"
+                                        FontSize="12"
+                                        Padding="10,5"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="GoToPoint_Clicked" />
+
+                                    <Button
+                                        Text="Удалить"
+                                        FontSize="12"
+                                        Padding="10,5"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeletePoint_Clicked" />
+
+                                </HorizontalStackLayout>
 
                             </Grid>
 
