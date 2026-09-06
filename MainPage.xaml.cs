@@ -94,10 +94,8 @@ public partial class MainPage : ContentPage
 
     private void AddPointToMap(MapPoint point)
     {
-        // Сохраняем точку в список
         _points.Add(point);
 
-        // Переводим GPS-координаты в координаты карты
         var projected = SphericalMercator.FromLonLat(
             point.Longitude,
             point.Latitude
@@ -108,19 +106,27 @@ public partial class MainPage : ContentPage
             projected.y
         );
 
-        // Создаём визуальную точку
         var feature = new PointFeature(mapPosition);
 
-        // Сохраняем дополнительные данные внутри маркера
         feature["Id"] = point.Id.ToString();
         feature["Name"] = point.Name;
         feature["Description"] = point.Description;
 
-        // Внешний вид точки
+        Mapsui.Styles.Color markerColor = point.MarkerColor switch
+        {
+            "Blue" => Mapsui.Styles.Color.Blue,
+            "Green" => Mapsui.Styles.Color.Green,
+            "Purple" => Mapsui.Styles.Color.Purple,
+            "Red" => Mapsui.Styles.Color.Red,
+
+            _ => Mapsui.Styles.Color.Red
+        };
+
         feature.Styles.Add(
             new VectorStyle
             {
-                Fill = new Mapsui.Styles.Brush(Mapsui.Styles.Color.Red),
+                Fill = new Mapsui.Styles.Brush(markerColor),
+
                 Outline = new Mapsui.Styles.Pen(
                     Mapsui.Styles.Color.White,
                     4
@@ -128,15 +134,12 @@ public partial class MainPage : ContentPage
             }
         );
 
-        // Добавляем точку в слой
         _pointsLayer.Features = _pointsLayer.Features
             .Append(feature)
             .ToList();
 
-        // Сообщаем Mapsui, что слой изменился
         _pointsLayer.DataHasChanged();
 
-        // Перемещаем карту к новой точке
         MapView.Map.Navigator.CenterOnAndZoomTo(
             mapPosition,
             MapView.Map.Navigator.Resolutions[12],
