@@ -888,44 +888,24 @@ public partial class MainPage : ContentPage
 
     private async void MainPage_Loaded(object? sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(
-            App.StartupPhotoPath))
-        {
+        if (string.IsNullOrWhiteSpace(App.StartupPhotoPath))
             return;
-        }
 
-        string photoPath =
-            App.StartupPhotoPath;
+        string photoPath = App.StartupPhotoPath;
 
         App.StartupPhotoPath = null;
+
+        await DisplayAlertAsync(
+            "Путь из командной строки",
+            photoPath,
+            "OK"
+        );
 
         if (!File.Exists(photoPath))
         {
             await DisplayAlertAsync(
                 "Ошибка",
                 $"Файл не найден:\n{photoPath}",
-                "OK"
-            );
-
-            return;
-        }
-
-        string extension =
-            Path.GetExtension(photoPath)
-                .ToLowerInvariant();
-
-        string[] supportedExtensions =
-        {
-            ".jpg",
-            ".jpeg",
-            ".png"
-        };
-
-        if (!supportedExtensions.Contains(extension))
-        {
-            await DisplayAlertAsync(
-                "Ошибка",
-                "Поддерживаются только изображения JPG, JPEG и PNG.",
                 "OK"
             );
 

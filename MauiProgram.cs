@@ -7,7 +7,8 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        string[] args = Environment.GetCommandLineArgs();
+        var args = Environment.GetCommandLineArgs();
+
         var builder = MauiApp.CreateBuilder();
 
         builder
@@ -15,17 +16,19 @@ public static class MauiProgram
             .UseSkiaSharp()
             .ConfigureFonts(fonts =>
             {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont(
+                    "OpenSans-Regular.ttf",
+                    "OpenSansRegular"
+                );
             });
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
-        
         if (args.Length > 1)
         {
-            App.StartupPhotoPath = args[1];
+            string photoPath = args[1]
+                .Trim()
+                .Trim('"');
+
+            App.StartupPhotoPath = photoPath;
         }
 
         return builder.Build();
