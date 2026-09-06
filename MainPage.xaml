@@ -46,11 +46,6 @@
                 FontAttributes="Bold"
                 VerticalOptions="Center" />
 
-            <Button
-                Grid.Column="1"
-                Text="Открыть фото"
-                Clicked="OpenPhoto_Clicked" />
-
         </Grid>
 
         <!-- Карта -->

@@ -748,11 +748,6 @@ public partial class MainPage : ContentPage
             $"GPS: {latitude:F5}, {longitude:F5}";
     }
 
-    private async void OpenPhoto_Clicked(object? sender, EventArgs e)
-    {
-        await OpenPhotoAsync();
-    }
-
     private async Task OpenPhotoAsync()
     {
         try
