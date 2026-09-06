@@ -137,33 +137,34 @@ public partial class MainPage : ContentPage
         );
     }
 
-    private void AddPointToMap(MapPoint point)
+    private async void AddPointToMap(MapPoint point)
     {
-        // Сохраняем модель точки
+        AddPointToMapInternal(point);
+
+        await SavePointsAsync();
+    }
+
+    private void AddPointToMapInternal(MapPoint point)
+    {
         _points.Add(point);
 
-
-        // GPS-координаты переводим
-        // в координаты Web Mercator
         var projected =
             SphericalMercator.FromLonLat(
                 point.Longitude,
                 point.Latitude
             );
 
+        var mapPosition =
+            new MPoint(
+                projected.x,
+                projected.y
+            );
 
-        var mapPosition = new MPoint(
-            projected.x,
-            projected.y
-        );
-
-
-        // Создаём объект Mapsui
         var feature =
-            new PointFeature(mapPosition);
+            new PointFeature(
+                mapPosition
+            );
 
-
-        // Сохраняем внутри feature данные точки
         feature["Id"] =
             point.Id.ToString();
 
@@ -173,32 +174,64 @@ public partial class MainPage : ContentPage
         feature["Description"] =
             point.Description;
 
-
-        // выбираем стиль в зависимости от настроек пользователя
         feature.Styles.Add(
             CreateMarkerStyle(point)
         );
 
-
-        // Добавляем feature в слой точек
         _pointsLayer.Features =
             _pointsLayer.Features
                 .Append(feature)
                 .ToList();
 
-
-        // Сообщаем Mapsui, что данные слоя изменились
         _pointsLayer.DataHasChanged();
 
+        RefreshPointsList();
 
-        // После добавления перемещаемся к новой точке
         MapView.Map.Navigator.CenterOnAndZoomTo(
             mapPosition,
             MapView.Map.Navigator.Resolutions[12],
             500
         );
+    }
 
-        RefreshPointsList();
+    private async Task SavePointsAsync()
+    {
+        try
+        {
+            await PointStorageService
+                .SavePointsAsync(_points);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Ошибка сохранения",
+                ex.Message,
+                "OK"
+            );
+        }
+    }
+
+    private async Task LoadSavedPointsAsync()
+    {
+        try
+        {
+            var savedPoints =
+                await PointStorageService
+                    .LoadPointsAsync();
+
+            foreach (var point in savedPoints)
+            {
+                AddPointToMapInternal(point);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Ошибка загрузки",
+                ex.Message,
+                "OK"
+            );
+        }
     }
 
     private void RefreshPointsList()
@@ -572,28 +605,34 @@ public partial class MainPage : ContentPage
         RemovePoint(point);
     }
 
-    private void RemovePoint(MapPoint point)
+    private async void RemovePoint(MapPoint point)
     {
         _points.Remove(point);
 
         var featureToRemove =
             _pointsLayer.Features
-                .FirstOrDefault(feature =>
-                    feature["Id"]?.ToString()
-                    == point.Id.ToString()
+                .FirstOrDefault(
+                    feature =>
+                        feature["Id"]?.ToString()
+                        == point.Id.ToString()
                 );
 
         if (featureToRemove != null)
         {
             _pointsLayer.Features =
                 _pointsLayer.Features
-                    .Where(feature => feature != featureToRemove)
+                    .Where(
+                        feature =>
+                            feature != featureToRemove
+                    )
                     .ToList();
 
             _pointsLayer.DataHasChanged();
         }
 
         RefreshPointsList();
+
+        await SavePointsAsync();
     }
 
     private async void MyLocation_Clicked(object? sender, EventArgs e)
@@ -888,18 +927,20 @@ public partial class MainPage : ContentPage
 
     private async void MainPage_Loaded(object? sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(App.StartupPhotoPath))
-            return;
+        Loaded -= MainPage_Loaded;
 
-        string photoPath = App.StartupPhotoPath;
+        await LoadSavedPointsAsync();
+
+        if (string.IsNullOrWhiteSpace(
+            App.StartupPhotoPath))
+        {
+            return;
+        }
+
+        string photoPath =
+            App.StartupPhotoPath;
 
         App.StartupPhotoPath = null;
-
-        await DisplayAlertAsync(
-            "Путь из командной строки",
-            photoPath,
-            "OK"
-        );
 
         if (!File.Exists(photoPath))
         {
