@@ -218,6 +218,22 @@
           }
         }
       },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -2966,6 +2982,19 @@
             "related": ".aar;.pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-android/android-arm64": {
@@ -3151,6 +3180,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -5845,6 +5890,19 @@
             "related": ".aar;.pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-android/android-x64": {
@@ -6030,6 +6088,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -8724,6 +8798,19 @@
             "related": ".aar;.pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-android/iossimulator-x64": {
@@ -8903,6 +8990,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -11589,6 +11692,19 @@
         "runtime": {
           "lib/net10.0-android36.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -11774,6 +11890,22 @@
           }
         }
       },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -14456,6 +14588,19 @@
         "runtime": {
           "lib/net10.0-android36.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -14641,6 +14786,22 @@
           }
         }
       },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -17323,6 +17484,19 @@
         "runtime": {
           "lib/net10.0-android36.0/Xamarin.KotlinX.Serialization.Core.Jvm.dll": {
             "related": ".aar;.pdb;.xml"
+          }
+        }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -17547,6 +17721,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -18303,6 +18493,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-ios/android-arm64": {
@@ -18468,6 +18671,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -19155,6 +19374,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-ios/android-x64": {
@@ -19320,6 +19552,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -20007,6 +20255,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-ios/iossimulator-x64": {
@@ -20176,6 +20437,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -20865,6 +21142,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-ios/maccatalyst-x64": {
@@ -21034,6 +21324,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -21723,6 +22029,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-ios/win-x64": {
@@ -21885,6 +22204,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -22569,6 +22904,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-maccatalyst": {
@@ -22755,6 +23103,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -23491,6 +23855,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-maccatalyst/android-arm64": {
@@ -23656,6 +24033,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -24343,6 +24736,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-maccatalyst/android-x64": {
@@ -24508,6 +24914,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -25195,6 +25617,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-maccatalyst/iossimulator-x64": {
@@ -25357,6 +25792,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -26041,6 +26492,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-maccatalyst/maccatalyst-x64": {
@@ -26206,6 +26670,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -26893,6 +27373,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-maccatalyst/win-x64": {
@@ -27055,6 +27548,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -27739,6 +28248,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-windows10.0.19041.0": {
@@ -27942,6 +28464,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -29071,6 +29609,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-windows10.0.19041.0/android-arm64": {
@@ -29233,6 +29784,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -30133,6 +30700,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-windows10.0.19041.0/android-x64": {
@@ -30295,6 +30875,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -31195,6 +31791,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-windows10.0.19041.0/iossimulator-x64": {
@@ -31354,6 +31963,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -32249,6 +32874,19 @@
         "runtime": {
           "lib/net5.0/Topten.RichTextKit.dll": {
             "related": ".pdb;.xml"
+          }
+        }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
           }
         }
       }
@@ -32414,6 +33052,22 @@
           }
         }
       },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -33307,6 +33961,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     },
     "net10.0-windows10.0.19041.0/win-x64": {
@@ -33470,6 +34137,22 @@
         },
         "runtime": {
           "lib/net9.0/Mapsui.Tiling.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MetadataExtractor/2.8.1": {
+        "type": "package",
+        "dependencies": {
+          "XmpCore": "6.1.10.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MetadataExtractor.dll": {
             "related": ".xml"
           }
         }
@@ -34392,6 +35075,19 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "XmpCore/6.1.10.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/XmpCore.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
@@ -34695,6 +35391,27 @@
         "lib/net9.0/Mapsui.Tiling.xml",
         "mapsui.tiling.5.1.0.nupkg.sha512",
         "mapsui.tiling.nuspec"
+      ]
+    },
+    "MetadataExtractor/2.8.1": {
+      "sha512": "5VFc1urVZiIjB6zZ4nUkqDJntGPGPgPIrSqRtkAZ1AFDKHmxbRSHL3zZi9qMd8JYtOu/T8d5rZ7740jj/+dHOg==",
+      "type": "package",
+      "path": "metadataextractor/2.8.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net35/MetadataExtractor.dll",
+        "lib/net35/MetadataExtractor.xml",
+        "lib/net45/MetadataExtractor.dll",
+        "lib/net45/MetadataExtractor.xml",
+        "lib/netstandard1.3/MetadataExtractor.dll",
+        "lib/netstandard1.3/MetadataExtractor.xml",
+        "lib/netstandard2.0/MetadataExtractor.dll",
+        "lib/netstandard2.0/MetadataExtractor.xml",
+        "metadata-extractor-logo-128.png",
+        "metadataextractor.2.8.1.nupkg.sha512",
+        "metadataextractor.nuspec"
       ]
     },
     "Microsoft.Extensions.Configuration/10.0.0": {
@@ -39625,12 +40342,30 @@
         "xamarin.kotlinx.serialization.core.jvm.1.9.0.1.nupkg.sha512",
         "xamarin.kotlinx.serialization.core.jvm.nuspec"
       ]
+    },
+    "XmpCore/6.1.10.1": {
+      "sha512": "/Tp2/e39e7z8hLtS4TXt0FNNZHbf5yNFfHS0/59soXlgOzZlyRZivvzWpvujyaWkTWWgecp/1nHxkuc5vntn7A==",
+      "type": "package",
+      "path": "xmpcore/6.1.10.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/XmpCore.dll",
+        "lib/net35/XmpCore.xml",
+        "lib/netstandard1.0/XmpCore.dll",
+        "lib/netstandard1.0/XmpCore.xml",
+        "lib/netstandard2.0/XmpCore.dll",
+        "lib/netstandard2.0/XmpCore.xml",
+        "xmpcore.6.1.10.1.nupkg.sha512",
+        "xmpcore.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net10.0-android": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
       "Microsoft.NET.ILLink.Tasks >= 10.0.11"
@@ -39638,6 +40373,7 @@
     "net10.0-ios": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
       "Microsoft.NET.ILLink.Tasks >= 10.0.11"
@@ -39645,6 +40381,7 @@
     "net10.0-maccatalyst": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20",
       "Microsoft.NET.ILLink.Tasks >= 10.0.11"
@@ -39652,6 +40389,7 @@
     "net10.0-windows10.0.19041.0": [
       "BruTile >= 6.0.0",
       "Mapsui.Maui >= 5.1.0",
+      "MetadataExtractor >= 2.8.1",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.20"
     ]
@@ -39735,6 +40473,10 @@
           "Mapsui.Maui": {
             "target": "Package",
             "version": "[5.1.0, )"
+          },
+          "MetadataExtractor": {
+            "target": "Package",
+            "version": "[2.8.1, )"
           },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
@@ -40061,6 +40803,10 @@
             "target": "Package",
             "version": "[5.1.0, )"
           },
+          "MetadataExtractor": {
+            "target": "Package",
+            "version": "[2.8.1, )"
+          },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
             "version": "[10.0.0, )"
@@ -40385,6 +41131,10 @@
           "Mapsui.Maui": {
             "target": "Package",
             "version": "[5.1.0, )"
+          },
+          "MetadataExtractor": {
+            "target": "Package",
+            "version": "[2.8.1, )"
           },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
@@ -40711,6 +41461,10 @@
           "Mapsui.Maui": {
             "target": "Package",
             "version": "[5.1.0, )"
+          },
+          "MetadataExtractor": {
+            "target": "Package",
+            "version": "[2.8.1, )"
           },
           "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",

@@ -338,6 +338,7 @@ C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Mapsui.Nts.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Mapsui.Rendering.Skia.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Mapsui.Tiling.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\MetadataExtractor.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Extensions.Configuration.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Extensions.DependencyInjection.dll
@@ -397,6 +398,7 @@ C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Svg.Model.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Svg.Skia.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Topten.RichTextKit.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\XmpCore.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\ar\Microsoft.Maui.Controls.resources.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\ca\Microsoft.Maui.Controls.resources.dll
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\cs\Microsoft.Maui.Controls.resources.dll

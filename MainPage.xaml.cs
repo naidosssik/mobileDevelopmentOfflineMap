@@ -11,6 +11,7 @@ using Mapsui.Tiling.Layers;
 using Microsoft.Maui.Devices.Sensors;   
 
 using OfflineMapApp.Models;
+using OfflineMapApp.Services;
 
 namespace OfflineMapApp;
 
@@ -787,6 +788,12 @@ public partial class MainPage : ContentPage
     {
         if (string.IsNullOrWhiteSpace(photoPath))
         {
+            await DisplayAlertAsync(
+                "Ошибка",
+                "Путь к фотографии пустой.",
+                "OK"
+            );
+
             return;
         }
 
@@ -794,17 +801,90 @@ public partial class MainPage : ContentPage
         {
             await DisplayAlertAsync(
                 "Ошибка",
-                "Файл изображения не найден.",
+                $"Файл не найден:\n{photoPath}",
                 "OK"
             );
 
             return;
         }
 
-        await DisplayAlertAsync(
-            "Фото выбрано",
-            $"Файл:\n{Path.GetFileName(photoPath)}",
-            "OK"
-        );
+        try
+        {
+            var gps =
+                PhotoMetadataService
+                    .GetGpsCoordinates(photoPath);
+
+            // Если GPS в EXIF нет
+            if (gps == null)
+            {
+                await DisplayAlertAsync(
+                    "GPS не найден",
+                    $"Фотография выбрана:\n" +
+                    $"{Path.GetFileName(photoPath)}\n\n" +
+                    "Но GPS-координаты в EXIF отсутствуют.",
+                    "OK"
+                );
+
+                return;
+            }
+
+            double latitude =
+                gps.Value.Latitude;
+
+            double longitude =
+                gps.Value.Longitude;
+
+            // Временно показываем, что GPS реально прочитан
+            await DisplayAlertAsync(
+                "EXIF GPS найден",
+                $"Широта: {latitude:F6}\n" +
+                $"Долгота: {longitude:F6}",
+                "OK"
+            );
+
+            // Создаём точку
+            var point = new MapPoint
+            {
+                Name =
+                    Path.GetFileNameWithoutExtension(photoPath),
+
+                Latitude = latitude,
+
+                Longitude = longitude,
+
+                Description =
+                    "Точка создана из GPS фотографии",
+
+                Source = "Photo",
+
+                PhotoPath = photoPath,
+
+                MarkerColor = "Blue",
+
+                MarkerShape = "Pin",
+
+                MarkerContent = "Icon",
+
+                MarkerIcon = "Photo"
+            };
+
+            // ВАЖНО:
+            // именно эта строка добавляет точку
+            AddPointToMap(point);
+
+            await DisplayAlertAsync(
+                "Точка добавлена",
+                $"Точка «{point.Name}» добавлена на карту.",
+                "OK"
+            );
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Ошибка обработки фото",
+                ex.ToString(),
+                "OK"
+            );
+        }
     }
 }
