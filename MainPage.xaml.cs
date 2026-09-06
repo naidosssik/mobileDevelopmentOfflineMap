@@ -26,15 +26,12 @@ public partial class MainPage : ContentPage
 
     private PointFeature? _currentLocationFeature;
 
-
-    // Отдельный слой Mapsui,
-    // на котором будут находиться наши точки
+    // Отдельный слой Mapsui, на котором будут находиться наши точки
     private readonly MemoryLayer _pointsLayer = new()
     {
         Name = "User Points",
         Style = null
     };
-
 
     public MainPage()
     {
@@ -42,6 +39,7 @@ public partial class MainPage : ContentPage
 
         InitializeMap();
         RefreshPointsList();
+        Loaded += MainPage_Loaded;
     }
 
     private void InitializeMap()
@@ -886,5 +884,54 @@ public partial class MainPage : ContentPage
                 "OK"
             );
         }
+    }
+
+    private async void MainPage_Loaded(object? sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(
+            App.StartupPhotoPath))
+        {
+            return;
+        }
+
+        string photoPath =
+            App.StartupPhotoPath;
+
+        App.StartupPhotoPath = null;
+
+        if (!File.Exists(photoPath))
+        {
+            await DisplayAlertAsync(
+                "Ошибка",
+                $"Файл не найден:\n{photoPath}",
+                "OK"
+            );
+
+            return;
+        }
+
+        string extension =
+            Path.GetExtension(photoPath)
+                .ToLowerInvariant();
+
+        string[] supportedExtensions =
+        {
+            ".jpg",
+            ".jpeg",
+            ".png"
+        };
+
+        if (!supportedExtensions.Contains(extension))
+        {
+            await DisplayAlertAsync(
+                "Ошибка",
+                "Поддерживаются только изображения JPG, JPEG и PNG.",
+                "OK"
+            );
+
+            return;
+        }
+
+        await ProcessPhotoAsync(photoPath);
     }
 }

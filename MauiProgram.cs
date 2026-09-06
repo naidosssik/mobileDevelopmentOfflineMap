@@ -7,6 +7,7 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        string[] args = Environment.GetCommandLineArgs();
         var builder = MauiApp.CreateBuilder();
 
         builder
@@ -21,6 +22,11 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+        
+        if (args.Length > 1)
+        {
+            App.StartupPhotoPath = args[1];
+        }
 
         return builder.Build();
     }
