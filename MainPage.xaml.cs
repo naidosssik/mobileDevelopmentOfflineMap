@@ -8,6 +8,7 @@ using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
+using Microsoft.Maui.Devices.Sensors;   
 
 using OfflineMapApp.Models;
 
@@ -21,6 +22,8 @@ public partial class MainPage : ContentPage
 
     // Список всех пользовательских точек
     private readonly List<MapPoint> _points = new();
+
+    private PointFeature? _currentLocationFeature;
 
 
     // Отдельный слой Mapsui,
@@ -592,5 +595,221 @@ public partial class MainPage : ContentPage
         }
 
         RefreshPointsList();
+    }
+
+    private async void MyLocation_Clicked(object? sender, EventArgs e)
+    {
+        try
+        {
+            GpsStatusLabel.Text =
+                "GPS: определяем местоположение...";
+
+            var request =
+                new GeolocationRequest(
+                    GeolocationAccuracy.Medium,
+                    TimeSpan.FromSeconds(10)
+                );
+
+            Location? location =
+                await Geolocation.Default
+                    .GetLocationAsync(request);
+
+
+            if (location == null)
+            {
+                GpsStatusLabel.Text =
+                    "GPS: местоположение не найдено";
+
+                await DisplayAlertAsync(
+                    "GPS",
+                    "Не удалось определить местоположение.",
+                    "OK"
+                );
+
+                return;
+            }
+
+
+            ShowCurrentLocation(location);
+        }
+        catch (FeatureNotSupportedException)
+        {
+            GpsStatusLabel.Text =
+                "GPS: не поддерживается";
+
+            await DisplayAlertAsync(
+                "GPS",
+                "Геолокация не поддерживается на этом устройстве.",
+                "OK"
+            );
+        }
+        catch (PermissionException)
+        {
+            GpsStatusLabel.Text =
+                "GPS: нет разрешения";
+
+            await DisplayAlertAsync(
+                "GPS",
+                "Приложению не разрешён доступ к местоположению.",
+                "OK"
+            );
+        }
+        catch (Exception ex)
+        {
+            GpsStatusLabel.Text =
+                "GPS: ошибка";
+
+            await DisplayAlertAsync(
+                "Ошибка GPS",
+                ex.Message,
+                "OK"
+            );
+        }
+    }
+
+    private void ShowCurrentLocation(Location location)
+    {
+        double latitude =
+            location.Latitude;
+
+        double longitude =
+            location.Longitude;
+
+
+        var projected =
+            SphericalMercator.FromLonLat(
+                longitude,
+                latitude
+            );
+
+
+        var mapPosition =
+            new MPoint(
+                projected.x,
+                projected.y
+            );
+
+
+        // Если предыдущая GPS-точка уже была,
+        // удаляем её
+        if (_currentLocationFeature != null)
+        {
+            _pointsLayer.Features =
+                _pointsLayer.Features
+                    .Where(feature =>
+                        feature != _currentLocationFeature
+                    )
+                    .ToList();
+        }
+
+
+        // Создаём новую GPS-точку
+        _currentLocationFeature =
+            new PointFeature(mapPosition);
+
+
+        // Отдельный стиль для GPS
+        _currentLocationFeature.Styles.Add(
+            new VectorStyle
+            {
+                Fill =
+                    new Mapsui.Styles.Brush(
+                        Mapsui.Styles.Color.Blue
+                    ),
+
+                Outline =
+                    new Mapsui.Styles.Pen(
+                        Mapsui.Styles.Color.White,
+                        4
+                    )
+            }
+        );
+
+
+        _pointsLayer.Features =
+            _pointsLayer.Features
+                .Append(_currentLocationFeature)
+                .ToList();
+
+
+        _pointsLayer.DataHasChanged();
+
+
+        // Центрируем карту
+        MapView.Map.Navigator.CenterOnAndZoomTo(
+            mapPosition,
+            MapView.Map.Navigator.Resolutions[13],
+            500
+        );
+
+
+        // Показываем координаты
+        GpsStatusLabel.Text =
+            $"GPS: {latitude:F5}, {longitude:F5}";
+    }
+
+    private async void OpenPhoto_Clicked(object? sender, EventArgs e)
+    {
+        await OpenPhotoAsync();
+    }
+
+    private async Task OpenPhotoAsync()
+    {
+        try
+        {
+            var result = await FilePicker.Default.PickAsync(
+                new PickOptions
+                {
+                    PickerTitle = "Выберите фотографию",
+
+                    FileTypes = FilePickerFileType.Images
+                }
+            );
+
+            if (result == null)
+            {
+                return;
+            }
+
+            await ProcessPhotoAsync(result.FullPath);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Ошибка",
+                $"Не удалось открыть изображение:\n{ex.Message}",
+                "OK"
+            );
+        }
+    }
+
+    private async void OpenPhotoMenu_Clicked(object? sender, EventArgs e)
+    {
+        await OpenPhotoAsync();
+    }
+
+    private async Task ProcessPhotoAsync(string photoPath)
+    {
+        if (string.IsNullOrWhiteSpace(photoPath))
+        {
+            return;
+        }
+
+        if (!File.Exists(photoPath))
+        {
+            await DisplayAlertAsync(
+                "Ошибка",
+                "Файл изображения не найден.",
+                "OK"
+            );
+
+            return;
+        }
+
+        await DisplayAlertAsync(
+            "Фото выбрано",
+            $"Файл:\n{Path.GetFileName(photoPath)}",
+            "OK"
+        );
     }
 }

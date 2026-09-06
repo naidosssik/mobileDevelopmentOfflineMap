@@ -7,6 +7,28 @@
     x:Class="OfflineMapApp.MainPage"
     Title="Offline Map">
 
+    <ContentPage.MenuBarItems>
+
+        <MenuBarItem Text="Файл">
+
+            <MenuFlyoutItem
+                Text="Открыть фото"
+                Clicked="OpenPhotoMenu_Clicked">
+
+                <MenuFlyoutItem.KeyboardAccelerators>
+
+                    <KeyboardAccelerator
+                        Modifiers="Ctrl"
+                        Key="O" />
+
+                </MenuFlyoutItem.KeyboardAccelerators>
+
+            </MenuFlyoutItem>
+
+        </MenuBarItem>
+
+    </ContentPage.MenuBarItems>
+
     <Grid
         RowDefinitions="Auto,*,Auto"
         ColumnDefinitions="*,300">
@@ -26,7 +48,8 @@
 
             <Button
                 Grid.Column="1"
-                Text="Открыть фото" />
+                Text="Открыть фото"
+                Clicked="OpenPhoto_Clicked" />
 
         </Grid>
 
@@ -174,7 +197,8 @@
                 Clicked="AddPoint_Clicked" />
 
             <Button
-                Text="Моё местоположение" />
+                Text="Моё местоположение"
+                Clicked="MyLocation_Clicked" />
 
             <Button
                 Text="Скачать область" />
@@ -189,6 +213,7 @@
             ColumnDefinitions="*,*">
 
             <Label
+                x:Name="GpsStatusLabel"
                 Text="GPS: не определён" />
 
             <Label
