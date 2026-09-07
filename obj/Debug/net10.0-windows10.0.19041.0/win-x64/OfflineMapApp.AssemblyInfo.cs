@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OfflineMapApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+a4b67c3900b6c9516315db043e192936b28e4dde")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+41ed1ffcacdcc1ad5b9ba4139d23d2d58a8af4a2")]
 [assembly: System.Reflection.AssemblyProductAttribute("OfflineMapApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OfflineMapApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

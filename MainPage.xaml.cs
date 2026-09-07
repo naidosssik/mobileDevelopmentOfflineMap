@@ -2,6 +2,7 @@
 
 using BruTile.Predefined;
 using BruTile.Web;
+using BruTile.Cache;
 
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
@@ -24,12 +25,21 @@ public partial class MainPage : ContentPage
     // Вставь сюда свой действующий ключ Yandex Tiles API
     private const string YandexApiKey = "2cffb843-ca1a-430e-b39b-07f1d5b570a1";
 
-
     // Список всех пользовательских точек
     private readonly List<MapPoint> _points = new();
 
     private PointFeature? _currentLocationFeature;
     private MauiLocation? _currentLocation;
+
+    private TileLayer? _onlineTileLayer;
+    private TileLayer? _offlineTileLayer;
+
+    private readonly string _tileCachePath = Path.Combine(
+        FileSystem.AppDataDirectory,
+        "TileCache"
+    );
+
+    private bool _isOfflineMode;
 
     // Отдельный слой Mapsui, на котором будут находиться наши точки
     private readonly MemoryLayer _pointsLayer = new()
@@ -66,16 +76,26 @@ public partial class MainPage : ContentPage
             "&projection=web_mercator" +
             $"&apikey={YandexApiKey}";
 
+        Directory.CreateDirectory(_tileCachePath);
+
+        var tileCache = new FileCache(
+                _tileCachePath,
+                "png"
+            );
 
         var tileSource = new HttpTileSource(
             new GlobalSphericalMercator(),
             tileUrl,
-            name: "Yandex Maps"
+            name: "Yandex Maps",
+            persistentCache: tileCache
         );
 
-        var tileLayer = new TileLayer(tileSource);
+        _onlineTileLayer = new TileLayer(tileSource)
+        {
+            Name = "Yandex Maps"
+        };
 
-        MapView.Map.Layers.Add(tileLayer);
+        MapView.Map.Layers.Add(_onlineTileLayer);
         MapView.Map.Layers.Add(_routeLayer);
         MapView.Map.Layers.Add(_pointsLayer);
 
@@ -912,6 +932,7 @@ public partial class MainPage : ContentPage
         Loaded -= MainPage_Loaded;
 
         await LoadSavedPointsAsync();
+        await LoadOfflineMapAsync();
 
         if (string.IsNullOrWhiteSpace(
             App.StartupPhotoPath))
@@ -1163,5 +1184,89 @@ public partial class MainPage : ContentPage
             MBoxFit.Fit,
             40
         );
-}
+    }
+
+    private async Task LoadOfflineMapAsync()
+    {
+        try
+        {
+            string targetPath =
+                Path.Combine(
+                    FileSystem.AppDataDirectory,
+                    "offline.mbtiles"
+                );
+
+            if (!File.Exists(targetPath))
+            {
+                using Stream source =
+                    await FileSystem.OpenAppPackageFileAsync(
+                        "offline.mbtiles"
+                    );
+
+                using FileStream destination =
+                    File.Create(targetPath);
+
+                await source.CopyToAsync(destination);
+            }
+
+            var connectionString =
+                new SQLite.SQLiteConnectionString(
+                    targetPath,
+                    false
+                );
+
+            var tileSource =
+                new BruTile.MbTiles.MbTilesTileSource(
+                    connectionString
+                );
+
+            _offlineTileLayer =
+                new TileLayer(tileSource)
+                {
+                    Name = "Offline Map"
+                };
+        }
+        catch (FileNotFoundException)
+        {
+            _offlineTileLayer = null;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Оффлайн-карта",
+                $"Не удалось загрузить оффлайн-карту:\n{ex.Message}",
+                "OK"
+            );
+        }
+    }
+
+    private async void OfflineMode_Clicked(object? sender, EventArgs e)
+    {
+        _isOfflineMode =
+            !_isOfflineMode;
+
+        if (_isOfflineMode)
+        {
+            OfflineModeButton.Text =
+                "Онлайн-режим";
+
+            OfflineStatusLabel.Text =
+                "Режим: оффлайн";
+
+            await DisplayAlertAsync(
+                "Оффлайн-режим",
+                "Будут доступны ранее загруженные участки карты.",
+                "OK"
+            );
+        }
+        else
+        {
+            OfflineModeButton.Text =
+                "Оффлайн-режим";
+
+            OfflineStatusLabel.Text =
+                "Режим: онлайн";
+        }
+    }
+
 }

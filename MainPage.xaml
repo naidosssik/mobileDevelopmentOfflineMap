@@ -203,7 +203,18 @@
                 Clicked="MyLocation_Clicked" />
 
             <Button
+                x:Name="OfflineModeButton"
+                Text="Оффлайн-режим"
+                Clicked="OfflineMode_Clicked" />
+
+            <Button
                 Text="Скачать область" />
+
+            <Label
+                x:Name="OfflineStatusLabel"
+                Text="Режим: онлайн"
+                FontSize="12"
+                TextColor="Gray" />
 
         </VerticalStackLayout>
 

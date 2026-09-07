@@ -553,3 +553,10 @@ C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\obj\Debug\net10.0-windows
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\obj\Debug\net10.0-windows10.0.19041.0\win-x64\qualifiers.txt
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\obj\Debug\net10.0-windows10.0.19041.0\win-x64\qualifiers.txt.intermediate
 C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\obj\Debug\net10.0-windows10.0.19041.0\win-x64\MultipleQualifiersPerDimensionFound.txt
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\offline.mbtiles
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\BruTile.MbTiles.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\SQLite-net.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\SQLitePCLRaw.batteries_v2.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\SQLitePCLRaw.core.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Users\HONOR\study\polytech\OfflineMap\OfflineMapApp\bin\Debug\net10.0-windows10.0.19041.0\win-x64\e_sqlite3.dll

@@ -76,6 +76,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "BruTile.MbTiles": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Mapsui.Maui": {
               "target": "Package",
               "version": "[5.1.0, )"
@@ -406,6 +410,10 @@
           "targetAlias": "net10.0-ios",
           "dependencies": {
             "BruTile": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "BruTile.MbTiles": {
               "target": "Package",
               "version": "[6.0.0, )"
             },
@@ -742,6 +750,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "BruTile.MbTiles": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Mapsui.Maui": {
               "target": "Package",
               "version": "[5.1.0, )"
@@ -1073,6 +1085,10 @@
           "targetAlias": "net10.0-windows10.0.19041.0",
           "dependencies": {
             "BruTile": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "BruTile.MbTiles": {
               "target": "Package",
               "version": "[6.0.0, )"
             },
