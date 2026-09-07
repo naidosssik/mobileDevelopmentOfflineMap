@@ -4,19 +4,19 @@ using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Cache;
 
-using Mapsui.Nts;
-using NetTopologySuite.Geometries;
-using MauiLocation = Microsoft.Maui.Devices.Sensors.Location;
-
 using Mapsui;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
-using Microsoft.Maui.Devices.Sensors;
 
 using OfflineMapApp.Models;
 using OfflineMapApp.Services;
+
+using Mapsui.Nts;
+using NetTopologySuite.Geometries;
+using Microsoft.Maui.Devices.Sensors;
+using MauiLocation = Microsoft.Maui.Devices.Sensors.Location;
 
 namespace OfflineMapApp;
 
@@ -32,7 +32,6 @@ public partial class MainPage : ContentPage
     private MauiLocation? _currentLocation;
 
     private TileLayer? _onlineTileLayer;
-    private TileLayer? _offlineTileLayer;
 
     private readonly string _tileCachePath = Path.Combine(
         FileSystem.AppDataDirectory,
@@ -932,7 +931,6 @@ public partial class MainPage : ContentPage
         Loaded -= MainPage_Loaded;
 
         await LoadSavedPointsAsync();
-        await LoadOfflineMapAsync();
 
         if (string.IsNullOrWhiteSpace(
             App.StartupPhotoPath))
@@ -1184,60 +1182,6 @@ public partial class MainPage : ContentPage
             MBoxFit.Fit,
             40
         );
-    }
-
-    private async Task LoadOfflineMapAsync()
-    {
-        try
-        {
-            string targetPath =
-                Path.Combine(
-                    FileSystem.AppDataDirectory,
-                    "offline.mbtiles"
-                );
-
-            if (!File.Exists(targetPath))
-            {
-                using Stream source =
-                    await FileSystem.OpenAppPackageFileAsync(
-                        "offline.mbtiles"
-                    );
-
-                using FileStream destination =
-                    File.Create(targetPath);
-
-                await source.CopyToAsync(destination);
-            }
-
-            var connectionString =
-                new SQLite.SQLiteConnectionString(
-                    targetPath,
-                    false
-                );
-
-            var tileSource =
-                new BruTile.MbTiles.MbTilesTileSource(
-                    connectionString
-                );
-
-            _offlineTileLayer =
-                new TileLayer(tileSource)
-                {
-                    Name = "Offline Map"
-                };
-        }
-        catch (FileNotFoundException)
-        {
-            _offlineTileLayer = null;
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlertAsync(
-                "Оффлайн-карта",
-                $"Не удалось загрузить оффлайн-карту:\n{ex.Message}",
-                "OK"
-            );
-        }
     }
 
     private async void OfflineMode_Clicked(object? sender, EventArgs e)
