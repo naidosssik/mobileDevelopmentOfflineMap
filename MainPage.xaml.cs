@@ -1297,8 +1297,7 @@ public partial class MainPage : ContentPage
             {
                 try
                 {
-                    await _yandexTileSource
-                        .GetTileAsync(
+                    await _yandexTileSource.GetTileAsync(
                             _tileHttpClient,
                             tileInfo
                         );

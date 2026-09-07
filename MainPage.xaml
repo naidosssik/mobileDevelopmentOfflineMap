@@ -206,7 +206,7 @@
                 x:Name="OfflineModeButton"
                 Text="Оффлайн-режим"
                 Clicked="OfflineMode_Clicked" />
-                
+
             <Button
                 Text="Скачать область"
                 Clicked="DownloadArea_Clicked" />
@@ -229,11 +229,6 @@
             <Label
                 x:Name="GpsStatusLabel"
                 Text="GPS: не определён" />
-
-            <Label
-                Grid.Column="1"
-                Text="Оффлайн: нет"
-                HorizontalOptions="End" />
 
         </Grid>
 
