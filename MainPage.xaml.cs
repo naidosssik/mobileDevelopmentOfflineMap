@@ -1322,4 +1322,75 @@ public partial class MainPage : ContentPage
         );
     }
 
+    private async void EditPoint_Clicked(object? sender, EventArgs e)
+    {
+        if (sender is not Button button)
+            return;
+
+        if (button.CommandParameter is not MapPoint point)
+            return;
+
+        var editPage = new AddPointPage(point);
+
+        editPage.BindingContext =
+            new Action<MapPoint>(updatedPoint =>
+            {
+                UpdatePointOnMap(updatedPoint);
+            });
+
+        await Navigation.PushModalAsync(editPage);
+    }
+
+    private async void UpdatePointOnMap(MapPoint point)
+    {
+        var oldFeature =
+            _pointsLayer.Features
+                .FirstOrDefault(feature =>
+                    feature["Id"]?.ToString()
+                    == point.Id.ToString()
+                );
+
+        if (oldFeature != null)
+        {
+            _pointsLayer.Features =
+                _pointsLayer.Features
+                    .Where(feature => feature != oldFeature)
+                    .ToList();
+        }
+
+        var projected =
+            SphericalMercator.FromLonLat(
+                point.Longitude,
+                point.Latitude
+            );
+
+        var mapPosition =
+            new MPoint(
+                projected.x,
+                projected.y
+            );
+
+        var feature =
+            new PointFeature(mapPosition);
+
+        feature["Id"] = point.Id.ToString();
+        feature["Name"] = point.Name;
+        feature["Description"] = point.Description;
+
+        feature.Styles.Add(
+            CreateMarkerStyle(point)
+        );
+
+        _pointsLayer.Features =
+            _pointsLayer.Features
+                .Append(feature)
+                .ToList();
+
+        _pointsLayer.DataHasChanged();
+
+        RefreshPointsList();
+
+        await SavePointsAsync();
+    }
+
 }

@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
-    x:Class="OfflineMapApp.MainPage">
+    x:Class="OfflineMapApp.MainPage"
+    Title="Карта">
 
     <ContentPage.MenuBarItems>
 
@@ -152,6 +153,13 @@
                                         FontSize="12"
                                         TextColor="Gray" />
 
+                                    <Label
+                                        Text="{Binding Description}"
+                                        FontSize="12"
+                                        TextColor="Gray"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="2" />
+
                                 </VerticalStackLayout>
 
                                 <!-- Кнопки -->
@@ -173,6 +181,13 @@
                                         Padding="10,5"
                                         CommandParameter="{Binding .}"
                                         Clicked="BuildRoute_Clicked" />
+
+                                    <Button
+                                        Text="Редактировать"
+                                        FontSize="12"
+                                        Padding="10,5"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="EditPoint_Clicked" />
 
                                     <Button
                                         Text="Удалить"

@@ -8,6 +8,7 @@ public partial class AddPointPage : ContentPage
     private string _selectedColor = "Red";
     private string _selectedShape = "Circle";
     private string _selectedContent = "Empty";
+    private MapPoint? _editingPoint;
 
     public AddPointPage()
     {
@@ -128,37 +129,34 @@ public partial class AddPointPage : ContentPage
         string markerIcon =
             IconPicker.SelectedItem?.ToString() ?? "Heart";
 
+        MapPoint point;
 
-        var point = new MapPoint
+        if (_editingPoint == null)
         {
-            Name = name,
+            point = new MapPoint();
+        }
+        else
+        {
+            point = _editingPoint;
+        }
 
-            Latitude = latitude,
-            Longitude = longitude,
+        point.Name = name;
+        point.Latitude = latitude;
+        point.Longitude = longitude;
+        point.Description = description;
+        point.Source = _editingPoint?.Source ?? "Manual";
 
-            Description = description,
-
-            Source = "Manual",
-
-            MarkerColor = _selectedColor,
-
-            MarkerShape = _selectedShape,
-
-            MarkerContent = _selectedContent,
-
-            MarkerIcon = markerIcon,
-
-            MarkerNumber = markerNumber
-        };
-
+        point.MarkerColor = _selectedColor;
+        point.MarkerShape = _selectedShape;
+        point.MarkerContent = _selectedContent;
+        point.MarkerIcon = markerIcon;
+        point.MarkerNumber = markerNumber;
 
         if (BindingContext is Action<MapPoint> addPointAction)
         {
             addPointAction(point);
         }
 
-
-        // Закрываем форму
         await Navigation.PopModalAsync();
     }
 
@@ -349,5 +347,31 @@ public partial class AddPointPage : ContentPage
             CultureInfo.InvariantCulture,
             out coordinate
         );
+    }
+
+    public AddPointPage(MapPoint point)
+    {
+        InitializeComponent();
+
+        _editingPoint = point;
+
+        NameEntry.Text = point.Name;
+        LatitudeEntry.Text = point.Latitude.ToString();
+        LongitudeEntry.Text = point.Longitude.ToString();
+        DescriptionEditor.Text = point.Description;
+
+        _selectedColor = point.MarkerColor;
+        _selectedShape = point.MarkerShape;     
+        _selectedContent = point.MarkerContent;
+
+        NumberEntry.Text =
+            point.MarkerNumber?.ToString() ?? string.Empty;
+
+        IconPicker.SelectedItem =
+            point.MarkerIcon;
+
+        UpdateColorSelection();
+        UpdateShapeSelection();
+        UpdateContentSelection();
     }
 }
