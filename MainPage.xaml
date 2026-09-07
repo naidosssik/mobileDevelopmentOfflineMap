@@ -162,41 +162,51 @@
 
                                 </VerticalStackLayout>
 
-                                <!-- Кнопки -->
-                                <HorizontalStackLayout
+                                <Grid
                                     Grid.Row="1"
                                     Grid.ColumnSpan="2"
-                                    Spacing="8">
+                                    RowDefinitions="Auto,Auto"
+                                    ColumnDefinitions="*,*"
+                                    RowSpacing="8"
+                                    ColumnSpacing="8">
 
                                     <Button
+                                        Grid.Row="0"
+                                        Grid.Column="0"
                                         Text="Перейти"
                                         FontSize="12"
-                                        Padding="10,5"
+                                        Padding="8,5"
                                         CommandParameter="{Binding .}"
                                         Clicked="GoToPoint_Clicked" />
 
                                     <Button
+                                        Grid.Row="0"
+                                        Grid.Column="1"
                                         Text="Маршрут"
                                         FontSize="12"
-                                        Padding="10,5"
+                                        Padding="8,5"
                                         CommandParameter="{Binding .}"
                                         Clicked="BuildRoute_Clicked" />
 
                                     <Button
-                                        Text="Редактировать"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Text="Изменить"
                                         FontSize="12"
-                                        Padding="10,5"
+                                        Padding="8,5"
                                         CommandParameter="{Binding .}"
                                         Clicked="EditPoint_Clicked" />
 
                                     <Button
+                                        Grid.Row="1"
+                                        Grid.Column="1"
                                         Text="Удалить"
                                         FontSize="12"
-                                        Padding="10,5"
+                                        Padding="8,5"
                                         CommandParameter="{Binding .}"
                                         Clicked="DeletePoint_Clicked" />
 
-                                </HorizontalStackLayout>
+                                </Grid>
 
                             </Grid>
 
