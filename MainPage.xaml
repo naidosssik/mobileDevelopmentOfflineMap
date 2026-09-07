@@ -206,9 +206,10 @@
                 x:Name="OfflineModeButton"
                 Text="Оффлайн-режим"
                 Clicked="OfflineMode_Clicked" />
-
+                
             <Button
-                Text="Скачать область" />
+                Text="Скачать область"
+                Clicked="DownloadArea_Clicked" />
 
             <Label
                 x:Name="OfflineStatusLabel"

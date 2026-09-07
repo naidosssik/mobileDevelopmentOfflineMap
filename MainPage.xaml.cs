@@ -33,6 +33,9 @@ public partial class MainPage : ContentPage
 
     private TileLayer? _onlineTileLayer;
 
+    private HttpTileSource? _yandexTileSource;
+    private readonly HttpClient _tileHttpClient = new();
+
     private readonly string _tileCachePath = Path.Combine(
         FileSystem.AppDataDirectory,
         "TileCache"
@@ -82,14 +85,15 @@ public partial class MainPage : ContentPage
                 "png"
             );
 
-        var tileSource = new HttpTileSource(
+        _yandexTileSource = new HttpTileSource(
             new GlobalSphericalMercator(),
             tileUrl,
             name: "Yandex Maps",
             persistentCache: tileCache
         );
+ 
 
-        _onlineTileLayer = new TileLayer(tileSource)
+        _onlineTileLayer = new TileLayer(_yandexTileSource)
         {
             Name = "Yandex Maps"
         };
@@ -1211,6 +1215,112 @@ public partial class MainPage : ContentPage
             OfflineStatusLabel.Text =
                 "Режим: онлайн";
         }
+    }
+
+    private async void DownloadArea_Clicked(object? sender, EventArgs e)
+    {
+        if (_yandexTileSource == null)
+        {
+            await DisplayAlertAsync(
+                "Скачать область",
+                "Источник карты ещё не готов.",
+                "OK"
+            );
+
+            return;
+        }
+
+        try
+        {
+            await DownloadVisibleAreaAsync();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlertAsync(
+                "Ошибка",
+                $"Не удалось скачать область:\n{ex.Message}",
+                "OK"
+            );
+        }
+    }
+
+    private async Task DownloadVisibleAreaAsync()
+    {
+        if (_yandexTileSource == null)
+            return;
+
+        var viewport =
+            MapView.Map.Navigator.Viewport;
+
+        if (viewport.Width <= 0 ||
+            viewport.Height <= 0)
+        {
+            await DisplayAlertAsync(
+                "Скачать область",
+                "Карта ещё не готова.",
+                "OK"
+            );
+
+            return;
+        }
+
+        var extent =
+            new BruTile.Extent(
+                viewport.CenterX - viewport.Width / 2,
+                viewport.CenterY - viewport.Height / 2,
+                viewport.CenterX + viewport.Width / 2,
+                viewport.CenterY + viewport.Height / 2
+            );
+
+        int minZoom = 10;
+        int maxZoom = 15;
+
+        int downloadedCount = 0;
+
+        for (int zoom = minZoom;
+            zoom <= maxZoom;
+            zoom++)
+        {
+            var resolution =
+                _yandexTileSource.Schema
+                    .Resolutions[zoom]
+                    .UnitsPerPixel;
+
+            var tileInfos =
+                _yandexTileSource.Schema
+                    .GetTileInfos(
+                        extent,
+                        resolution
+                    );
+
+            foreach (var tileInfo in tileInfos)
+            {
+                try
+                {
+                    await _yandexTileSource
+                        .GetTileAsync(
+                            _tileHttpClient,
+                            tileInfo
+                        );
+
+                    downloadedCount++;
+
+                    await Task.Delay(50);
+                }
+                catch
+                {
+                    // Один неудачный тайл
+                    // не должен останавливать всю загрузку
+                }
+            }
+        }
+
+        await DisplayAlertAsync(
+            "Готово",
+            $"Область сохранена в кэш.\n" +
+            $"Загружено тайлов: {downloadedCount}",
+            "OK"
+        );
     }
 
 }
